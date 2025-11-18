@@ -1,0 +1,150 @@
+/**
+ * =============================================================================
+ * Less 变量定义 - 面试重点
+ * =============================================================================
+ *
+ * 【面试题】CSS 预处理器的作用？
+ * 答：
+ * 1. 变量：统一管理颜色、尺寸等
+ * 2. 嵌套：更好的代码组织
+ * 3. 混合（Mixin）：代码复用
+ * 4. 函数：颜色计算等
+ * 5. 模块化：导入拆分
+ *
+ * 【面试题】Less、Sass、Stylus 的区别？
+ * 答：
+ * - Less：变量 @，较简单
+ * - Sass/SCSS：变量 $，功能强大
+ * - Stylus：语法灵活，可省略符号
+ */
+
+// =============================================================================
+// 颜色
+// =============================================================================
+
+// 品牌色
+@primary-color: #1890ff;
+@success-color: #52c41a;
+@warning-color: #faad14;
+@error-color: #ff4d4f;
+@info-color: #1890ff;
+
+// 文字色
+@text-color: rgba(0, 0, 0, 0.85);
+@text-color-secondary: rgba(0, 0, 0, 0.45);
+@text-color-disabled: rgba(0, 0, 0, 0.25);
+
+// 背景色
+@bg-color: #f0f2f5;
+@bg-color-light: #fafafa;
+@bg-color-dark: #001529;
+
+// 边框色
+@border-color: #d9d9d9;
+
+// =============================================================================
+// 字体
+// =============================================================================
+
+@font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+@font-size-base: 14px;
+@font-size-sm: 12px;
+@font-size-lg: 16px;
+
+@line-height-base: 1.5715;
+
+// =============================================================================
+// 间距
+// =============================================================================
+
+@spacing-xs: 4px;
+@spacing-sm: 8px;
+@spacing-md: 16px;
+@spacing-lg: 24px;
+@spacing-xl: 32px;
+
+// =============================================================================
+// 边框
+// =============================================================================
+
+@border-radius-base: 4px;
+@border-radius-sm: 2px;
+@border-radius-lg: 8px;
+
+// =============================================================================
+// 阴影
+// =============================================================================
+
+@shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+@shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+@shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+// =============================================================================
+// 布局
+// =============================================================================
+
+@header-height: 64px;
+@sider-width: 220px;
+@sider-collapsed-width: 80px;
+
+// =============================================================================
+// 断点
+// =============================================================================
+
+@screen-xs: 480px;
+@screen-sm: 576px;
+@screen-md: 768px;
+@screen-lg: 992px;
+@screen-xl: 1200px;
+@screen-xxl: 1600px;
+
+// =============================================================================
+// 混合（Mixin）
+// =============================================================================
+
+/**
+ * 【面试题】什么是 Mixin？
+ * 答：可复用的代码块，类似函数，可以带参数
+ */
+
+// 文本省略
+.text-ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行省略
+.text-ellipsis-multi(@lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Flex 居中
+.flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 清除浮动
+.clearfix() {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// 绝对定位居中
+.absolute-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

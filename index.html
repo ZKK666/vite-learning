@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      【知识点】favicon 配置
+      Vite 会自动处理 public 目录下的静态资源
+    -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!--
+      【面试题】viewport meta 标签的作用？
+      答：
+      - width=device-width: 视口宽度等于设备宽度
+      - initial-scale=1.0: 初始缩放比例为 1
+      - 实现响应式布局的基础配置
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      【实战经验】SEO 相关 meta 标签
+      虽然 SPA 的 SEO 不如 SSR，但基础 meta 还是要配置
+    -->
+    <meta name="description" content="Vite 7 + React 18 企业级后台管理系统" />
+    <meta name="keywords" content="vite,react,admin,typescript" />
+
+    <title>Vite Admin - 学习项目</title>
+
+    <!--
+      【知识点】预连接优化
+      提前建立与关键域名的连接，减少请求延迟
+    -->
+    <!-- <link rel="preconnect" href="https://api.example.com" /> -->
+
+    <!--
+      【实战经验】加载字体的最佳实践
+      使用 preload 预加载关键字体资源
+    -->
+    <!-- <link rel="preload" href="/fonts/custom.woff2" as="font" type="font/woff2" crossorigin /> -->
+
+    <!--BUILD_INFO-->
+  </head>
+  <body>
+    <!--
+      【面试题】为什么使用 id="root" 作为挂载点？
+      答：
+      - React 的约定俗成，方便团队协作
+      - 与其他 DOM 元素隔离，避免冲突
+      - 便于样式控制和调试
+    -->
+    <div id="root"></div>
+
+    <!--
+      【知识点】noscript 标签
+      当浏览器禁用 JavaScript 时显示的内容
+      虽然现代应用必须依赖 JS，但提供友好提示是好习惯
+    -->
+    <noscript>
+      <div style="text-align: center; padding: 50px;">
+        <h1>请启用 JavaScript</h1>
+        <p>本应用需要 JavaScript 支持才能正常运行</p>
+      </div>
+    </noscript>
+
+    <!--
+      【面试题】为什么 script 标签使用 type="module"？
+      答：
+      1. 告诉浏览器这是一个 ES Module
+      2. 自动启用严格模式
+      3. 支持 import/export 语法
+      4. 默认 defer，不阻塞 HTML 解析
+
+      【知识点】Vite 开发服务器的工作原理
+      1. 浏览器请求 /src/main.tsx
+      2. Vite 服务器拦截请求
+      3. 实时编译 TypeScript/JSX
+      4. 返回编译后的 ESM 代码
+      5. 浏览器执行，遇到 import 继续请求
+    -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

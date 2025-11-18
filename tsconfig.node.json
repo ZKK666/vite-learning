@@ -1,0 +1,30 @@
+{
+  /**
+   * 【知识点】tsconfig.node.json
+   * 专门用于 Node.js 环境的配置文件（如 vite.config.ts）
+   *
+   * 【面试题】为什么需要单独的 tsconfig.node.json？
+   * 答：
+   * vite.config.ts 运行在 Node.js 环境，需要不同的配置
+   * 比如不需要 DOM 类型，需要 Node.js 类型
+   */
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"]
+  },
+  "include": ["vite.config.ts"]
+}

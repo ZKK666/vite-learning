@@ -1,0 +1,194 @@
+/**
+ * =============================================================================
+ * 全局样式 - 面试重点
+ * =============================================================================
+ *
+ * 【面试题】CSS 重置（Reset）和标准化（Normalize）的区别？
+ * 答：
+ * Reset：完全清除浏览器默认样式
+ * Normalize：保留有用的默认样式，修复浏览器差异
+ *
+ * 推荐使用 Normalize 或类似方案
+ */
+
+// 导入变量
+@import './variables.less';
+
+/**
+ * 【知识点】CSS 盒模型
+ *
+ * 【面试题】box-sizing 的值有哪些？区别是什么？
+ * 答：
+ * - content-box（默认）：width 只包含内容
+ * - border-box：width 包含 padding 和 border
+ *
+ * 推荐全局使用 border-box，更符合直觉
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// 基础样式
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: @font-family-base;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @text-color;
+  background-color: @bg-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 根元素
+#root {
+  height: 100%;
+}
+
+/**
+ * 【知识点】链接样式
+ *
+ * 【面试题】a 标签的伪类顺序？
+ * 答：LVHA - :link, :visited, :hover, :active
+ */
+a {
+  color: @primary-color;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: lighten(@primary-color, 10%);
+  }
+}
+
+// 列表样式
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// 图片
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+// 表单元素
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/**
+ * 【知识点】滚动条样式
+ *
+ * 【实战经验】自定义滚动条
+ * 只有 Webkit 内核浏览器支持
+ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/**
+ * 【知识点】工具类
+ *
+ * 【面试题】工具类（Utility-first）CSS 的优缺点？
+ * 答：
+ * 优点：
+ * - 快速开发
+ * - 减少 CSS 体积
+ * - 无需命名
+ *
+ * 缺点：
+ * - HTML 类名冗长
+ * - 学习成本
+ * - 可读性差
+ */
+
+// 文本省略
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行省略
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// 清除浮动
+.clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// Flex 居中
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 隐藏元素
+.hidden {
+  display: none !important;
+}
+
+// 可视隐藏（保留空间）
+.invisible {
+  visibility: hidden;
+}
+
+/**
+ * 【知识点】过渡动画
+ */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}

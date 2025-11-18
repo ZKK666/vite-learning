@@ -1,0 +1,206 @@
+{
+  /**
+   * =============================================================================
+   * TypeScript 配置详解 - 面试重点
+   * =============================================================================
+   *
+   * 【面试题】tsconfig.json 的作用？
+   * 答：
+   * 1. 指定 TypeScript 编译选项
+   * 2. 指定需要编译的文件
+   * 3. IDE 类型检查和智能提示依赖此配置
+   *
+   * 【面试题】为什么要使用 TypeScript？
+   * 答：
+   * 1. 静态类型检查，减少运行时错误
+   * 2. 更好的 IDE 支持和代码补全
+   * 3. 便于重构和维护
+   * 4. 自文档化（类型即文档）
+   */
+  "compilerOptions": {
+    /**
+     * 【知识点】target 指定编译后的 JS 版本
+     * Vite 会自行处理转换，这里主要影响类型检查
+     */
+    "target": "ES2020",
+
+    /**
+     * 【知识点】useDefineForClassFields
+     * ECMAScript 类字段的标准行为
+     */
+    "useDefineForClassFields": true,
+
+    /**
+     * 【知识点】lib 指定可用的类型声明
+     * ES2020: ES2020 标准库
+     * DOM: 浏览器 DOM API
+     * DOM.Iterable: DOM 集合的迭代器
+     */
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    /**
+     * 【知识点】module 指定模块系统
+     * ESNext: 使用最新的 ES 模块语法
+     */
+    "module": "ESNext",
+
+    /**
+     * 【知识点】skipLibCheck 跳过声明文件检查
+     * 提高编译速度，大型项目建议开启
+     */
+    "skipLibCheck": true,
+
+    /* 打包器模式配置 */
+    /**
+     * 【知识点】moduleResolution 模块解析策略
+     * bundler: 专为打包工具优化的解析策略（Vite 推荐）
+     *
+     * 【面试题】Node 和 Bundler 解析策略的区别？
+     * 答：
+     * - Node: 遵循 Node.js 的解析规则
+     * - Bundler: 支持 package.json exports 字段，更适合现代打包工具
+     */
+    "moduleResolution": "bundler",
+
+    /**
+     * 【知识点】allowImportingTsExtensions
+     * 允许导入时带 .ts/.tsx 扩展名
+     */
+    "allowImportingTsExtensions": true,
+
+    /**
+     * 【知识点】resolveJsonModule
+     * 允许导入 JSON 文件并进行类型推断
+     */
+    "resolveJsonModule": true,
+
+    /**
+     * 【知识点】isolatedModules
+     * 确保每个文件可以独立编译（Vite 要求）
+     *
+     * 【面试题】为什么 Vite 要求 isolatedModules: true？
+     * 答：Vite 使用 esbuild 单文件编译，不支持跨文件类型推断
+     */
+    "isolatedModules": true,
+
+    /**
+     * 【知识点】moduleDetection
+     * force: 所有文件都视为模块（即使没有 import/export）
+     */
+    "moduleDetection": "force",
+
+    /**
+     * 【知识点】noEmit
+     * 不输出编译文件，类型检查专用
+     * Vite 使用自己的编译流程
+     */
+    "noEmit": true,
+
+    /**
+     * 【知识点】jsx
+     * react-jsx: 使用 React 17+ 的新 JSX 转换
+     * 不需要在每个文件 import React
+     */
+    "jsx": "react-jsx",
+
+    /* 严格模式配置 - 面试重点 */
+    /**
+     * 【面试题】strict 模式包含哪些检查？
+     * 答：
+     * - strictNullChecks: 严格的 null/undefined 检查
+     * - strictFunctionTypes: 严格的函数类型检查
+     * - strictBindCallApply: 严格的 bind/call/apply 检查
+     * - strictPropertyInitialization: 严格的属性初始化检查
+     * - noImplicitAny: 禁止隐式 any
+     * - noImplicitThis: 禁止隐式 this
+     * - alwaysStrict: 总是使用严格模式
+     */
+    "strict": true,
+
+    /**
+     * 【知识点】noUnusedLocals 和 noUnusedParameters
+     * 检查未使用的变量和参数
+     * 开发时建议关闭，CI/CD 时开启
+     */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    /**
+     * 【知识点】noFallthroughCasesInSwitch
+     * 检查 switch 语句的 case 穿透
+     */
+    "noFallthroughCasesInSwitch": true,
+
+    /**
+     * 【知识点】noUncheckedIndexedAccess
+     * 数组/对象索引访问时加入 undefined 检查
+     * 更严格，但可能需要额外的类型断言
+     */
+    "noUncheckedIndexedAccess": true,
+
+    /**
+     * 【知识点】esModuleInterop 和 allowSyntheticDefaultImports
+     * 提供更好的 CommonJS/ES Module 互操作性
+     */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /**
+     * 【知识点】forceConsistentCasingInFileNames
+     * 强制文件名大小写一致
+     * 避免跨平台（Mac/Windows/Linux）问题
+     */
+    "forceConsistentCasingInFileNames": true,
+
+    /**
+     * 【知识点】baseUrl 和 paths 配置路径别名
+     * 需要和 vite.config.ts 中的 alias 保持一致
+     *
+     * 【面试题】为什么需要在 tsconfig 中也配置路径别名？
+     * 答：
+     * - Vite alias：运行时和构建时的模块解析
+     * - tsconfig paths：IDE 智能提示和类型检查
+     * 两者需要保持同步
+     */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"],
+      "@store/*": ["src/store/*"],
+      "@api/*": ["src/api/*"],
+      "@assets/*": ["src/assets/*"],
+      "@styles/*": ["src/styles/*"],
+      "@types/*": ["src/types/*"]
+    },
+
+    /**
+     * 【知识点】types 指定全局类型声明
+     * 只加载指定的类型包，加快编译速度
+     */
+    "types": ["node", "vite/client"]
+  },
+
+  /**
+   * 【知识点】include 和 exclude
+   * 指定需要编译和排除的文件
+   */
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+
+  /**
+   * 【知识点】references 项目引用
+   * 用于多项目（monorepo）配置
+   */
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
