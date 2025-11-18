@@ -18,7 +18,7 @@
  * - History: URL 美观，需要服务器配置支持（所有路径返回 index.html）
  */
 
-import { lazy, Suspense, type ReactNode } from 'react'
+import { lazy, Suspense } from 'react'
 import {
   createBrowserRouter,
   Navigate,

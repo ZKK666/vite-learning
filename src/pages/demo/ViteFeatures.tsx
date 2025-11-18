@@ -8,7 +8,7 @@
 
 import { useState } from 'react'
 import { Card, Tabs, Typography, Space, Tag, Alert, Divider, Button } from 'antd'
-import { ThunderboltOutlined, FileImageOutlined, SettingOutlined } from '@ant-design/icons'
+import { ThunderboltOutlined } from '@ant-design/icons'
 
 // 【知识点】静态资源导入方式演示
 // 导入图片

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * =============================================================================
  * Vite 类型声明文件详解
@@ -30,6 +31,8 @@
  * 【实战经验】
  * 定义环境变量类型后，使用 import.meta.env.VITE_XXX 会有智能提示
  */
+// 【知识点】使用 declare 扩展全局类型
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface ImportMetaEnv {
   /** 应用标题 */
   readonly VITE_APP_TITLE: string
@@ -47,14 +50,6 @@ interface ImportMetaEnv {
   readonly VITE_DEBUG: string
   /** 是否压缩 */
   readonly VITE_COMPRESS: string
-}
-
-/**
- * 【知识点】扩展 ImportMeta 接口
- * 让 import.meta.env 具有正确的类型
- */
-interface ImportMeta {
-  readonly env: ImportMetaEnv
 }
 
 /**
@@ -101,6 +96,7 @@ declare global {
    * 【实战经验】扩展 Window 接口
    * 用于第三方库挂载的全局变量
    */
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface Window {
     // 例如：百度统计
     // _hmt: any[]

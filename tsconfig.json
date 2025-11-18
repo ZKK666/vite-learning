@@ -190,17 +190,10 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.d.ts",
-    "vite.config.ts"
+    "src/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
     "dist"
-  ],
-
-  /**
-   * 【知识点】references 项目引用
-   * 用于多项目（monorepo）配置
-   */
-  "references": [{ "path": "./tsconfig.node.json" }]
+  ]
 }

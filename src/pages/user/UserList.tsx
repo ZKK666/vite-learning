@@ -42,11 +42,12 @@ export default function UserList() {
   )
 
   // 删除确认
-  const handleDelete = (id: number) => {
+  const handleDelete = (_id: number) => {
     Modal.confirm({
       title: '确认删除',
       content: '确定要删除这个用户吗？',
       onOk: () => {
+        // 实际项目中这里会调用删除 API，传入 _id
         message.success('删除成功')
       },
     })

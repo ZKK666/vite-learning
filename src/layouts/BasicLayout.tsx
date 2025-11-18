@@ -27,9 +27,7 @@ import {
   LogoutOutlined,
   SettingOutlined,
   DashboardOutlined,
-  TeamOutlined,
   ThunderboltOutlined,
-  FileTextOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 
@@ -117,9 +115,9 @@ export default function BasicLayout() {
    * 使用 useMatches 获取路由匹配信息
    */
   const breadcrumbItems = matches
-    .filter((match) => match.handle?.title)
+    .filter((match) => (match.handle as { title?: string })?.title)
     .map((match) => ({
-      title: match.handle?.title as string,
+      title: (match.handle as { title?: string })?.title as string,
       href: match.pathname,
     }))
 

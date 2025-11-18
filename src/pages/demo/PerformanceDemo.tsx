@@ -7,7 +7,7 @@
  */
 
 import { useState, useCallback, useMemo, memo, lazy, Suspense, startTransition } from 'react'
-import { Card, Tabs, Typography, Space, Alert, Divider, Button, List, Input, Spin } from 'antd'
+import { Card, Tabs, Typography, Space, Alert, Divider, Button, Input, Spin } from 'antd'
 import { RocketOutlined } from '@ant-design/icons'
 
 import styles from './PerformanceDemo.module.less'
@@ -260,11 +260,11 @@ const ExpensiveList = ({ count }: ExpensiveListProps) => {
   console.log('ExpensiveList rendered')
 
   // 模拟昂贵的渲染
-  const items = Array.from({ length: count }, (_, i) => `Item ${i + 1}`)
+  const _items = Array.from({ length: count }, (_, i) => `Item ${i + 1}`)
 
   return (
     <div className={styles.listBox}>
-      <Text type="secondary">渲染了 {count} 个项目</Text>
+      <Text type="secondary">渲染了 {count} 个项目（生成了 {_items.length} 项）</Text>
     </div>
   )
 }
@@ -286,6 +286,9 @@ function TransitionDemo() {
     })
   }
 
+  // 显示列表长度以使用 list 变量
+  const listLength = list.length
+
   return (
     <div>
       <Button onClick={handleClick} loading={isPending}>
@@ -294,6 +297,7 @@ function TransitionDemo() {
       <Paragraph>
         <Text type="secondary">
           使用 startTransition 不会阻塞用户交互
+          {listLength > 0 && `（已加载 ${listLength} 条）`}
         </Text>
       </Paragraph>
     </div>
