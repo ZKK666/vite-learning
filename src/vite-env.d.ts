@@ -102,6 +102,23 @@ declare global {
     // _hmt: any[]
     // 例如：自定义配置
     // __APP_CONFIG__: Record<string, unknown>
+
+    /**
+     * 【安全实践】权限管理
+     * 注意：不要直接挂载权限数组，使用封装的权限管理器
+     *
+     * ❌ 不安全的做法：
+     * __permissions__: string[]  // 可被用户在控制台直接修改
+     *
+     * ✅ 安全的做法：
+     * 使用 Proxy 包装的只读权限对象
+     */
+    __permissions__?: {
+      readonly has: (permission: string) => boolean
+      readonly hasAny: (permissions: string[]) => boolean
+      readonly hasAll: (permissions: string[]) => boolean
+      readonly list: () => readonly string[]
+    }
   }
 }
 

@@ -14,6 +14,22 @@
  * 答：
  * - 开发时：启动一个 dev server，拦截浏览器的 ESM 请求，按需编译返回
  * - 构建时：使用 Rollup 进行打包，输出高度优化的静态资源
+ *
+ * 【面试题】Vite 和 Webpack 如何选择？
+ * 答：
+ * Vite 优势：
+ * - 开发启动速度快（秒级 vs 分钟级）
+ * - HMR 更快（<100ms vs 1-5s）
+ * - 配置简单，开箱即用
+ * - 适合：新项目、现代框架、中小型应用
+ *
+ * Webpack 优势：
+ * - 生态成熟（10000+ loader/plugin）
+ * - Module Federation 微前端方案
+ * - 兼容性强（支持老浏览器、老项目）
+ * - 适合：大型企业项目、复杂构建需求、需兼容旧环境
+ *
+ * 结论：不是替代关系，而是互补。新项目优先 Vite，复杂场景用 Webpack。
  */
 
 import { defineConfig, loadEnv, type ConfigEnv, type UserConfig } from 'vite'
@@ -306,9 +322,26 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
        * 【面试题】什么是 sourcemap？生产环境要不要开启？
        * 答：
        * sourcemap 将压缩后的代码映射回源代码，便于调试
-       * 生产环境建议：
-       * - 'hidden' 或 false：安全考虑，不暴露源码
-       * - true：方便线上问题排查，但需要做好权限控制
+       *
+       * 【Vite Sourcemap 选项】类似 Webpack，但更简洁：
+       * - false: 不生成（最安全，生产推荐）
+       * - true: 生成独立 .map 文件并添加引用注释（用户可见源码）
+       * - 'inline': sourcemap 内联到 JS 中（体积大，不推荐生产）
+       * - 'hidden': 生成 .map 但不添加引用注释（用于错误监控系统）
+       *
+       * 【Webpack 对比】
+       * Webpack 有 20+ 种组合：
+       * - eval: 最快，但重构后行号不准
+       * - cheap: 不包含列信息
+       * - module: 包含 loader 转换前的源码
+       * - source-map: 最完整，但最慢
+       * 常见组合：cheap-module-source-map, eval-source-map 等
+       *
+       * Vite 简化为 4 种，构建速度更快（基于 Rollup）
+       *
+       * 【生产环境最佳实践】
+       * - 'hidden'：配合 Sentry 等监控系统，安全且可追踪错误
+       * - false：完全不生成，最安全但无法追踪线上问题
        */
       sourcemap: mode === 'staging' ? 'hidden' : false,
 
