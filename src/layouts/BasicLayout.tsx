@@ -70,6 +70,8 @@ const menuItems: MenuProps['items'] = [
     children: [
       { key: '/demo/vite-features', label: 'Vite 特性' },
       { key: '/demo/performance', label: '性能优化' },
+      { key: '/demo/hmr-demo', label: 'HMR原理' },
+      { key: '/demo/state-persistence', label: '状态持久化' },
     ],
   },
 ]

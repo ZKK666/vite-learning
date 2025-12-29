@@ -71,6 +71,8 @@ const MenuManage = () => lazyLoad(() => import('@/pages/system/MenuManage'))
 // 演示页面
 const ViteFeatures = () => lazyLoad(() => import('@/pages/demo/ViteFeatures'))
 const PerformanceDemo = () => lazyLoad(() => import('@/pages/demo/PerformanceDemo'))
+const HMRStateDemo = () => lazyLoad(() => import('@/pages/demo/HMRStateDemo'))
+const StatePersistenceDemo = () => lazyLoad(() => import('@/pages/demo/StatePersistenceDemo'))
 
 // 错误页面
 const NotFound = () => lazyLoad(() => import('@/pages/error/NotFound'))
@@ -228,6 +230,22 @@ export const routes: RouteObject[] = [
             handle: {
               title: '性能优化演示',
               icon: 'RocketOutlined',
+            },
+          },
+          {
+            path: 'hmr-demo',
+            element: <HMRStateDemo />,
+            handle: {
+              title: 'HMR原理演示',
+              icon: 'RocketOutlined',
+            },
+          },
+          {
+            path: 'state-persistence',
+            element: <StatePersistenceDemo />,
+            handle: {
+              title: '状态持久化',
+              icon: 'SaveOutlined',
             },
           },
         ],
